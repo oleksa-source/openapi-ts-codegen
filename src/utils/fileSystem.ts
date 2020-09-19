@@ -1,7 +1,7 @@
-import * as fs from 'fs';
-import mkdirp from 'mkdirp';
-import rimraf from 'rimraf';
-import * as util from 'util';
+import * as fs from "fs";
+import mkdirp from "mkdirp";
+import rimraf from "rimraf";
+import * as util from "util";
 
 // Wrapped file system calls
 export const readFile = util.promisify(fs.readFile);
@@ -14,12 +14,12 @@ export const mkdir = mkdirp;
 
 // Promisified version of rimraf
 export const rmdir = (path: string) =>
-    new Promise((resolve, reject) => {
-        rimraf(path, (error: Error) => {
-            if (error) {
-                reject(error);
-            } else {
-                resolve();
-            }
-        });
+  new Promise((resolve, reject) => {
+    rimraf(path, (error: Error) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve();
+      }
     });
+  });

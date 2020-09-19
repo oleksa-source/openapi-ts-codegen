@@ -1,8 +1,8 @@
-import { OpenApiPath } from './OpenApiPath';
+import { OpenApiPath } from "./OpenApiPath";
 
 /**
  * https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.2.md#pathsObject
  */
 export interface OpenApiPaths {
-    [path: string]: OpenApiPath;
+  [path: string]: OpenApiPath;
 }

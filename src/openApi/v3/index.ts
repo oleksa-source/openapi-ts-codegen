@@ -1,9 +1,9 @@
-import { Client } from '../../client/interfaces/Client';
-import { OpenApi } from './interfaces/OpenApi';
-import { getModels } from './parser/getModels';
-import { getServer } from './parser/getServer';
-import { getServices } from './parser/getServices';
-import { getServiceVersion } from './parser/getServiceVersion';
+import { Client } from "../../client/interfaces/Client";
+import { OpenApi } from "./interfaces/OpenApi";
+import { getModels } from "./parser/getModels";
+import { getServer } from "./parser/getServer";
+import { getServices } from "./parser/getServices";
+import { getServiceVersion } from "./parser/getServiceVersion";
 
 /**
  * Parse the OpenAPI specification to a Client model that contains
@@ -11,10 +11,10 @@ import { getServiceVersion } from './parser/getServiceVersion';
  * @param openApi The OpenAPI spec  that we have loaded from disk.
  */
 export function parse(openApi: OpenApi): Client {
-    const version = getServiceVersion(openApi.info.version);
-    const server = getServer(openApi);
-    const models = getModels(openApi);
-    const services = getServices(openApi);
+  const version = getServiceVersion(openApi.info.version);
+  const server = getServer(openApi);
+  const models = getModels(openApi);
+  const services = getServices(openApi);
 
-    return { version, server, models, services };
+  return { version, server, models, services };
 }

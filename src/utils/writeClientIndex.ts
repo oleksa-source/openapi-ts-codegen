@@ -1,10 +1,10 @@
-import * as path from 'path';
+import * as path from "path";
 
-import { Client } from '../client/interfaces/Client';
-import { writeFile } from './fileSystem';
-import { Templates } from './registerHandlebarTemplates';
-import { sortModelsByName } from './sortModelsByName';
-import { sortServicesByName } from './sortServicesByName';
+import { Client } from "../client/interfaces/Client";
+import { writeFile } from "./fileSystem";
+import { Templates } from "./registerHandlebarTemplates";
+import { sortModelsByName } from "./sortModelsByName";
+import { sortServicesByName } from "./sortServicesByName";
 
 /**
  * Generate the OpenAPI client index file using the Handlebar template and write it to disk.
@@ -19,25 +19,25 @@ import { sortServicesByName } from './sortServicesByName';
  * @param exportSchemas: Generate schemas.
  */
 export async function writeClientIndex(
-    client: Client,
-    templates: Templates,
-    outputPath: string,
-    exportCore: boolean,
-    exportServices: boolean,
-    exportModels: boolean,
-    exportSchemas: boolean
+  client: Client,
+  templates: Templates,
+  outputPath: string,
+  exportCore: boolean,
+  exportServices: boolean,
+  exportModels: boolean,
+  exportSchemas: boolean
 ): Promise<void> {
-    await writeFile(
-        path.resolve(outputPath, 'index.ts'),
-        templates.index({
-            exportCore,
-            exportServices,
-            exportModels,
-            exportSchemas,
-            server: client.server,
-            version: client.version,
-            models: sortModelsByName(client.models),
-            services: sortServicesByName(client.services),
-        })
-    );
+  await writeFile(
+    path.resolve(outputPath, "index.ts"),
+    templates.index({
+      exportCore,
+      exportServices,
+      exportModels,
+      exportSchemas,
+      server: client.server,
+      version: client.version,
+      models: sortModelsByName(client.models),
+      services: sortServicesByName(client.services),
+    })
+  );
 }

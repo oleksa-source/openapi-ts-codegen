@@ -6,12 +6,12 @@
  * types.
  * @see: build.js for more information
  */
-declare module '*.hbs' {
-    export default {
-        compiler: [8, '>= 4.3.0'],
-        useData: true,
-        main: function (container, depth0, helpers, partials, data) {
-            return '';
-        },
-    };
+declare module "*.hbs" {
+  export default {
+    compiler: [8, ">= 4.3.0"],
+    useData: true,
+    main: function (container, depth0, helpers, partials, data) {
+      return "";
+    },
+  };
 }

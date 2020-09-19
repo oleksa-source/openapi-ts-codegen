@@ -1,4 +1,4 @@
-import { Type } from '../../../client/interfaces/Type';
+import { Type } from "../../../client/interfaces/Type";
 
 /**
  * If our model has a template type, then we want to generalize that!
@@ -7,5 +7,5 @@ import { Type } from '../../../client/interfaces/Type';
  * @returns The model template type (<T> or empty).
  */
 export function getModelTemplate(modelClass: Type): string {
-    return modelClass.template ? '<T>' : '';
+  return modelClass.template ? "<T>" : "";
 }

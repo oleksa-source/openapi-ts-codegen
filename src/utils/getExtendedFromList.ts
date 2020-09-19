@@ -1,7 +1,7 @@
-import { Client } from '../client/interfaces/Client';
-import { Model } from '../client/interfaces/Model';
-import { flatMap } from './flatMap';
-import { unique } from './unique';
+import { Client } from "../client/interfaces/Client";
+import { Model } from "../client/interfaces/Model";
+import { flatMap } from "./flatMap";
+import { unique } from "./unique";
 
 /**
  * Get the full list of models that are extended from the given model.
@@ -10,15 +10,17 @@ import { unique } from './unique';
  * @param client
  */
 export function getExtendedFromList(model: Model, client: Client): Model[] {
-    const extendedFrom = client.models.filter(ref => {
-        const names = ref.isDefinition ? [ref.name] : ref.base.split(' | ');
-        return names.find(name => {
-            return model.extends.includes(name);
-        });
+  const extendedFrom = client.models.filter((ref) => {
+    const names = ref.isDefinition ? [ref.name] : ref.base.split(" | ");
+    return names.find((name) => {
+      return model.extends.includes(name);
     });
+  });
 
-    if (extendedFrom.length) {
-        extendedFrom.push(...flatMap(extendedFrom, ref => getExtendedFromList(ref, client)));
-    }
-    return extendedFrom.filter(unique);
+  if (extendedFrom.length) {
+    extendedFrom.push(
+      ...flatMap(extendedFrom, (ref) => getExtendedFromList(ref, client))
+    );
+  }
+  return extendedFrom.filter(unique);
 }

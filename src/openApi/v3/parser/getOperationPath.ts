@@ -1,4 +1,4 @@
-import { getOperationParameterName } from './getOperationParameterName';
+import { getOperationParameterName } from "./getOperationParameterName";
 
 /**
  * Get the final service path, this replaces the "{api-version}" placeholder
@@ -8,9 +8,9 @@ import { getOperationParameterName } from './getOperationParameterName';
  * @param path
  */
 export function getOperationPath(path: string): string {
-    return path
-        .replace(/\{(.*?)\}/g, (_, w: string) => {
-            return `\${${getOperationParameterName(w)}}`;
-        })
-        .replace('${apiVersion}', '${OpenAPI.VERSION}');
+  return path
+    .replace(/\{(.*?)\}/g, (_, w: string) => {
+      return `\${${getOperationParameterName(w)}}`;
+    })
+    .replace("${apiVersion}", "${OpenAPI.VERSION}");
 }
