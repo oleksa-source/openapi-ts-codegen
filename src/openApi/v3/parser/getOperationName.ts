@@ -7,5 +7,5 @@ import camelCase from "camelcase";
  */
 export function getOperationName(value: string): string {
   const clean = value.replace(/[^\w\s\-]+/g, "-").trim();
-  return camelCase(clean);
+  return camelCase(clean, { pascalCase: true });
 }

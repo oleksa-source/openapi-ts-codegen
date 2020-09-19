@@ -14,10 +14,6 @@ import { getOperationResults } from "./getOperationResults";
 import { getServiceClassName } from "./getServiceClassName";
 import { sortByRequired } from "./sortByRequired";
 
-function capitalizeFirstLetter(input: string): string {
-  return input.charAt(0).toUpperCase() + input.slice(1);
-}
-
 export function getOperation(
   openApi: OpenApi,
   url: string,
@@ -31,7 +27,7 @@ export function getOperation(
   // const operationName = getOperationName(op.operationId || operationNameFallback);
   const operationPath = getOperationPath(url);
 
-  const operationName = `${method}${serviceName}${capitalizeFirstLetter(
+  const operationName = `${method}${getOperationName(
     url.substr(url.lastIndexOf("/") + 1, url.length)
   )}`;
 
