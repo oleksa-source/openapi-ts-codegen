@@ -1,26 +1,26 @@
-import { parse as parseV3 } from './openApi/v3';
-import { getOpenApiSpec } from './utils/getOpenApiSpec';
-import { isString } from './utils/isString';
-import { postProcessClient } from './utils/postProcessClient';
-import { registerHandlebarTemplates } from './utils/registerHandlebarTemplates';
-import { writeClient } from './utils/writeClient';
+import { parse as parseV3 } from "./openApi/v3";
+import { getOpenApiSpec } from "./utils/getOpenApiSpec";
+import { isString } from "./utils/isString";
+import { postProcessClient } from "./utils/postProcessClient";
+import { registerHandlebarTemplates } from "./utils/registerHandlebarTemplates";
+import { writeClient } from "./utils/writeClient";
 
 export enum HttpClient {
-    FETCH = 'fetch',
-    XHR = 'xhr',
+  FETCH = "fetch",
+  XHR = "xhr",
 }
 
 export interface Options {
-    input: string | Record<string, any>;
-    output: string;
-    httpClient?: HttpClient;
-    useOptions?: boolean;
-    useUnionTypes?: boolean;
-    exportCore?: boolean;
-    exportServices?: boolean;
-    exportModels?: boolean;
-    exportSchemas?: boolean;
-    write?: boolean;
+  input: string | Record<string, any>;
+  output: string;
+  httpClient?: HttpClient;
+  useOptions?: boolean;
+  useUnionTypes?: boolean;
+  exportCore?: boolean;
+  exportServices?: boolean;
+  exportModels?: boolean;
+  exportSchemas?: boolean;
+  write?: boolean;
 }
 
 /**
@@ -39,25 +39,35 @@ export interface Options {
  * @param write Write the files to disk (true or false).
  */
 export async function generate({
-    input,
-    output,
-    httpClient = HttpClient.FETCH,
-    useOptions = false,
-    useUnionTypes = false,
-    exportCore = true,
-    exportServices = true,
-    exportModels = true,
-    exportSchemas = false,
-    write = true,
+  input,
+  output,
+  httpClient = HttpClient.FETCH,
+  useOptions = false,
+  useUnionTypes = false,
+  exportCore = true,
+  exportServices = true,
+  exportModels = true,
+  exportSchemas = false,
+  write = true,
 }: Options): Promise<void> {
-    // Load the specification, read the OpenAPI version and load the
-    // handlebar templates for the given language
-    const openApi = isString(input) ? await getOpenApiSpec(input) : input;
-    const templates = registerHandlebarTemplates();
+  // Load the specification, read the OpenAPI version and load the
+  // handlebar templates for the given language
+  const openApi = isString(input) ? await getOpenApiSpec(input) : input;
+  const templates = registerHandlebarTemplates();
 
-    const client = parseV3(openApi);
-    const clientFinal = postProcessClient(client, useUnionTypes);
-    if (write) {
-        await writeClient(clientFinal, templates, output, httpClient, useOptions, exportCore, exportServices, exportModels, exportSchemas);
-    }
+  const client = parseV3(openApi);
+  const clientFinal = postProcessClient(client, useUnionTypes);
+  if (write) {
+    await writeClient(
+      clientFinal,
+      templates,
+      output,
+      httpClient,
+      useOptions,
+      exportCore,
+      exportServices,
+      exportModels,
+      exportSchemas
+    );
+  }
 }
