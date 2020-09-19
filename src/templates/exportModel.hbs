@@ -1,0 +1,17 @@
+/* istanbul ignore file */
+/* tslint:disable */
+/* eslint-disable */
+
+{{#if imports}}
+{{#each imports}}
+import { {{{this}}} } from './{{{this}}}';
+{{/each}}
+{{/if}}
+
+{{#equals export 'interface'}}
+{{>exportInterface}}
+{{else equals export 'enum'}}
+{{>exportEnum}}
+{{else}}
+{{>exportType}}
+{{/equals}}
