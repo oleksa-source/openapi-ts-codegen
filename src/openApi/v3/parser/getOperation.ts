@@ -14,6 +14,10 @@ import { getOperationResults } from "./getOperationResults";
 import { getServiceClassName } from "./getServiceClassName";
 import { sortByRequired } from "./sortByRequired";
 
+const lowercaseFirstLetter = (value: string): string => {
+  return value.charAt(0).toLowerCase() + value.slice(1);
+};
+
 export function getOperation(
   openApi: OpenApi,
   url: string,
@@ -26,8 +30,8 @@ export function getOperation(
   const operationNameFallback = `${method}${getOperationName(
     url.substr(url.lastIndexOf("/") + 1, url.length)
   )}`;
-  const operationName = getOperationName(
-    op.operationId || operationNameFallback
+  const operationName = lowercaseFirstLetter(
+    getOperationName(op.operationId || operationNameFallback)
   );
   const operationPath = getOperationPath(url);
 
