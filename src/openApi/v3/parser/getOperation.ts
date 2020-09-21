@@ -23,13 +23,13 @@ export function getOperation(
 ): Operation {
   const serviceName = (op.tags && op.tags[0]) || "Service";
   const serviceClassName = getServiceClassName(serviceName);
-  const operationNameFallback = `${method}${serviceClassName}`;
-  // const operationName = getOperationName(op.operationId || operationNameFallback);
-  const operationPath = getOperationPath(url);
-
-  const operationName = `${method}${getOperationName(
+  const operationNameFallback = `${method}${getOperationName(
     url.substr(url.lastIndexOf("/") + 1, url.length)
   )}`;
+  const operationName = getOperationName(
+    op.operationId || operationNameFallback
+  );
+  const operationPath = getOperationPath(url);
 
   // Create a new operation object for this method.
   const operation: Operation = {
